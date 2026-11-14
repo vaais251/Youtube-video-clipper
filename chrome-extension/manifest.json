@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Clip Downloader",
+  "version": "1.0.0",
+  "description": "Select, name, and export multiple MP4 clips from the video you are watching.",
+  "minimum_chrome_version": "116",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAw00RN3L/lEGd0q6aev7DzQviIALjq+ncLwyhubugdcHAC935iw7S4gLkHWtOgaz//e+zJYopE6otBSgMYPTQ6fi0Rk2TgzfEVe1JiQyo7fDwnUcae3OGtPGk53t8e1IiSW63Hxtxuc7UlhkTIN2kdX25LW9z83A0OdnGAK9pV2VSdpYdPORvEYdBRdxuX65lF/zYTGjVwQi09Dbxooo+C8ajOHp+WWPZOjGHManKmrO9iwUTIrP8fhOHGud7W5QZ2T3dUTBV9ujwfn04hxgJxM+Vua4BT+eavU1+Nz9gW1Cqc1A7amrcYEIb5Jaz386jhxMBO1xXIOsBxJ2iHl4V5wIDAQAB",
+  "permissions": ["sidePanel", "nativeMessaging", "storage", "scripting"],
+  "host_permissions": ["https://www.youtube.com/*", "https://m.youtube.com/*", "https://music.youtube.com/*"],
+  "action": { "default_title": "Open YouTube Clip Downloader", "default_icon": "icon.png" },
+  "icons": { "128": "icon.png" },
+  "side_panel": { "default_path": "panel.html" },
+  "background": { "service_worker": "background.js" }
+}

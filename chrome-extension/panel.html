@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTube Clip Downloader</title>
+  <link rel="stylesheet" href="panel.css">
+  <script type="module" src="panel.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <img src="icon.png" alt="" width="34" height="34">
+    <h1>Clip Downloader</h1>
+    <span id="connection" class="connection">Checking helper</span>
+  </header>
+  <main>
+    <section id="helper" class="card warning" aria-label="Windows helper setup" hidden>
+      <p id="helper-message"></p>
+      <button id="reconnect" type="button">Reconnect</button>
+    </section>
+
+    <section class="card source" aria-labelledby="video-title">
+      <h2 id="video-title">Open a YouTube video</h2>
+      <p id="video-note">Switch to a video or Short in this Chrome window to start clipping.</p>
+    </section>
+
+    <section id="editor" class="card" aria-labelledby="selection-title" hidden>
+      <div class="section-header">
+        <h2 id="selection-title">Selection</h2>
+        <output id="length" class="time">0:00.000</output>
+      </div>
+      <div class="timeline-header">
+        <button id="current" type="button" title="Center the timeline on the YouTube playhead">At <span id="playhead-time" class="time">0:00</span></button>
+        <div class="zoom" aria-label="Timeline zoom">
+          <button id="zoom-out" type="button" aria-label="Zoom out">−</button>
+          <button id="zoom-reset" type="button" aria-label="Show the full timeline">Fit</button>
+          <button id="zoom-in" type="button" aria-label="Zoom in">+</button>
+        </div>
+      </div>
+      <div id="timeline" class="timeline" aria-label="Clip timeline">
+        <div id="saved-ranges" aria-hidden="true"></div>
+        <div id="selected-range" aria-hidden="true"></div>
+        <div id="playhead" aria-hidden="true"></div>
+        <button id="start-handle" class="handle start" type="button" role="slider" aria-label="Clip start" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></button>
+        <button id="end-handle" class="handle end" type="button" role="slider" aria-label="Clip end" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"></button>
+      </div>
+      <div id="ruler" class="ruler time" aria-hidden="true"></div>
+      <label id="pan-field" class="pan" hidden>Timeline position <input id="pan" type="range" min="0" max="0" value="0"></label>
+      <p class="hint">Drag the end handles. Click the track to seek, or drag the track to mark a new range.</p>
+      <div class="fields">
+        <div><label for="start-time">Start</label><input id="start-time" class="time" value="0:00.000" type="text" spellcheck="false" inputmode="decimal"><button id="mark-start" class="mark" type="button">Set start here</button></div>
+        <div><label for="end-time">End</label><input id="end-time" class="time" value="0:00.000" type="text" spellcheck="false" inputmode="decimal"><button id="mark-end" class="mark" type="button">Set end here</button></div>
+      </div>
+      <label class="name-label" for="clip-name">Clip filename</label>
+      <input id="clip-name" type="text" placeholder="Automatic name" maxlength="255" spellcheck="false">
+      <p id="editor-error" class="error" role="alert" hidden></p>
+      <div class="row editor-actions">
+        <button id="preview" type="button">Play selection</button>
+        <button id="commit" class="primary" type="button">Add clip</button>
+        <button id="discard" type="button" hidden>Cancel edit</button>
+      </div>
+    </section>
+
+    <section id="queue" class="card" aria-labelledby="queue-title" hidden>
+      <div class="section-header">
+        <h2 id="queue-title">Clips</h2>
+        <span id="queue-count" class="time">0</span>
+      </div>
+      <p id="queue-empty" class="hint">Add a selection to build your batch.</p>
+      <ol id="queue-list" class="queue-list"></ol>
+    </section>
+
+    <section id="activity" class="card" aria-labelledby="activity-title" hidden>
+      <div class="section-header"><h2 id="activity-title">Export activity</h2><button id="cancel" type="button" hidden>Cancel export</button></div>
+      <p id="job-status" role="status"></p>
+      <progress id="job-progress" aria-label="Export progress" hidden></progress>
+      <ul id="job-files" class="job-files"></ul>
+      <ul id="job-warnings" class="job-warnings"></ul>
+    </section>
+  </main>
+  <footer class="export-footer">
+    <div class="row export-settings">
+      <label for="quality" class="quality-label">Quality
+        <select id="quality">
+          <option>Best available</option><option>Up to 2160p (4K)</option>
+          <option selected>Up to 1080p</option><option>Up to 720p</option><option>Up to 480p</option>
+        </select>
+      </label>
+      <label class="check"><input id="full" type="checkbox" disabled> Include full video</label>
+    </div>
+    <div class="row export-actions">
+      <button id="folder" type="button" disabled>Open folder</button>
+      <button id="download" class="primary" type="button" disabled>Download MP4s</button>
+    </div>
+    <p id="notice" class="error" role="alert" hidden></p>
+  </footer>
+</body>
+</html>
